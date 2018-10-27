@@ -10,7 +10,7 @@ import javax.xml.parsers.DocumentBuilderFactory
 
 private val logger = KotlinLogging.logger {}
 
-val fileMap = hashMapOf("TO" to "/ToWorkTemplate.tcx", "FROM" to "/FromWorkTemplate.tcx")
+val fileMap = hashMapOf("TO" to "/ToTemplate.tcx", "FROM" to "/FromTemplate.tcx")
 const val YYYY_MM_DD = "YYYY-MM-DD"
 
 class TcxTransform {

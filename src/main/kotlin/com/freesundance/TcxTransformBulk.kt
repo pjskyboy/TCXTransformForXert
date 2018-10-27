@@ -6,6 +6,8 @@ import org.w3c.dom.Document
 import org.xml.sax.InputSource
 import java.io.File
 import java.io.StringReader
+import java.time.DayOfWeek
+import java.time.LocalDate
 import javax.xml.parsers.DocumentBuilderFactory
 
 private val logger = KotlinLogging.logger {}
@@ -13,13 +15,18 @@ private val logger = KotlinLogging.logger {}
 fun main(args: Array<String>) {
         val tcxTransform = TcxTransform()
 
-        var day=28
-        while (day < 29) {
-            logger.info("day=$day")
-            val dayStr = String.format("%02d", day)
-            val dateStr = "2018-09-$dayStr"
-            tcxTransform.transform(dateStr, "TO")
-            tcxTransform.transform(dateStr, "FROM")
-            day++
+        var currentDate = LocalDate.parse("2018-09-03")
+        var endDate = LocalDate.parse("2018-10-26")
+        while (currentDate < endDate.plusDays(1)) {
+            logger.info("currentDate=$currentDate ${currentDate.dayOfWeek}")
+            if (isWeekday(currentDate.dayOfWeek)) {
+                tcxTransform.transform(currentDate.toString(), "TO")
+                tcxTransform.transform(currentDate.toString(), "FROM")
+            }
+            currentDate = currentDate.plusDays(1)
     }
+}
+
+fun isWeekday(dayOfWeek : DayOfWeek): Boolean {
+    return ((dayOfWeek != (DayOfWeek.SATURDAY)) && (dayOfWeek != (DayOfWeek.SUNDAY)))
 }
