@@ -18,7 +18,7 @@ fun main(args: Array<String>) {
             val tcxTransform = TcxTransform()
             var currentDate = LocalDate.parse(args[0])
             var endDate = LocalDate.parse(args[1])
-            while (currentDate < endDate.plusDays(1)) {
+            while (currentDate <= endDate) {
                 logger.info("currentDate=$currentDate ${currentDate.dayOfWeek}")
                 if (isWeekday(currentDate.dayOfWeek)) {
                     tcxTransform.transform(currentDate.toString(), "TO")
