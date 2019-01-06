@@ -1,0 +1,3 @@
+curl -u xert_public:xert_public -POST "https://www.xertonline.com/oauth/token" -d 'grant_type=password' -d 'username=pjskyboy' -d 'password=_Welkin125_'
+
+curl -POST "https://www.xertonline.com/oauth/upload" -H "Authorization: Bearer 880bac6cf24b3d9038fd0c470efd4a82798163bd" -F 'file=@2018-12-03-FROM.tcx' -F 'name=Test Upload'
