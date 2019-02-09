@@ -13,16 +13,17 @@ import javax.xml.parsers.DocumentBuilderFactory
 private val logger = KotlinLogging.logger {}
 
 fun main(args: Array<String>) {
-    val usage = "TcxTransformBulk.kt YYYY-MM-DD YYYY-MM-DD"
-        if (args.size == 2) {
+    val usage = "TcxTransformBulk.kt start-date-YYYY-MM-DD end-date-YYYY-MM-DD [SHORT|LONG]"
+        if (args.size == 3) {
             val tcxTransform = TcxTransform()
             var currentDate = LocalDate.parse(args[0])
-            var endDate = LocalDate.parse(args[1])
+            val endDate = LocalDate.parse(args[1])
+            val longOrShort = args[2]
             while (currentDate <= endDate) {
                 logger.info("currentDate=$currentDate ${currentDate.dayOfWeek}")
                 if (isWeekday(currentDate.dayOfWeek)) {
-                    tcxTransform.transform(currentDate.toString(), "TO")
-                    tcxTransform.transform(currentDate.toString(), "FROM")
+                    tcxTransform.transform(currentDate.toString(), "$longOrShort-TO")
+                    tcxTransform.transform(currentDate.toString(), "$longOrShort-FROM")
                 }
                 currentDate = currentDate.plusDays(1)
             }
